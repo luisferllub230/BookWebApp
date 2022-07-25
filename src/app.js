@@ -6,6 +6,9 @@ import tr from './model/TRelations.js';
 import BookWebApp from "./dataBase/BookWebApp.js";
 import {dirname} from 'path';
 import {fileURLToPath} from 'url';
+import UR from './routers/userRouts.js';
+import AR from './routers/adminRouts.js';
+import ER from './routers/errorRouts.js';
 
 //initialize express
 const app = express();
@@ -20,16 +23,20 @@ const __dirname = dirname(__filename);
 
 //configure express-handlebars
 app.engine('hbs', expressHbs.engine({
-    layoutsDir: 'view/layout',
+    layoutsDir: 'src/view/layout',
+    defaultLayout: 'main-layout',
+    extname: 'hbs'
 }));
 app.set('view engine', 'hbs');
-app.set('views',__dirname, 'view');
+app.set('views',path.join(__dirname,'view'));
 
 //configure static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './public')));
 
 //routes
-
+app.use(UR);
+app.use('/admin/',AR);
+app.use(ER);
 
 //tables relations
 tr();
