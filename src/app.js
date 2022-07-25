@@ -1,11 +1,11 @@
 import express from 'express';
 import expressHbs from 'express-handlebars';
 import path from 'path';
-import {dirname} from 'path';
-import {fileURLToPath} from 'url';
 import bodyParser from 'body-parser';
 import tr from './model/TRelations.js';
 import BookWebApp from "./dataBase/BookWebApp.js";
+import {dirname} from 'path';
+import {fileURLToPath} from 'url';
 
 //initialize express
 const app = express();
@@ -19,7 +19,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //configure express-handlebars
-app.engine('hbs', expressHbs.engine({}));
+app.engine('hbs', expressHbs.engine({
+    layoutsDir: 'view/layout',
+}));
 app.set('view engine', 'hbs');
 app.set('views',__dirname, 'view');
 
