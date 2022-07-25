@@ -4,6 +4,8 @@ import path from 'path';
 import {dirname} from 'path';
 import {fileURLToPath} from 'url';
 import bodyParser from 'body-parser';
+import tr from './model/TRelations.js';
+import BookWebApp from "./dataBase/BookWebApp.js";
 
 //initialize express
 const app = express();
@@ -26,4 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 
-app.listen(5500);
+
+//tables relations
+tr();
+
+//launch server and create or update database
+BookWebApp.sync({/*force:true*/}).then(()=>app.listen(5500)).catch(err =>console.log(err));
