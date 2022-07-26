@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="card">
+
+        <div class="card-header col-md-12 text-center"> 
+            <h1 class="card-title">{{title}}</h1>
+        </div>
+
+
+        {{#if activeEditorial}}
+        <form action="/admin/edit/editorial" method="post" class="needs-validation" novalidate>
+
+            <div class="card-body row">
+
+                <div class="col-md-12">
+                    <div class="form-group fs-4 me-3 mt-2 mb-1">
+                        <label for="editorialName" class="form-label mb-0">Editorial name</label>
+                        <input type="text" class="form-control" id="editorialName" name="editorialN" placeholder="Name" value="{{editorial.EditorialName}}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group fs-4 me-3 mt-3 mb-1">
+                            <label for="editorialPhone" class="">Editorial phone</label>
+                            <input type="text" class="form-control" id="editorialPhone" name="editorialP" placeholder="000-000-0000" maxlength="10" autocomplete="off" min="1" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="{{editorial.EditorialPhone}}" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Phone number.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group fs-4 me-3 mt-3 mb-1">
+                            <label for="editorialCountry" class="">Editorial country</label>
+                            <input type="text" class="form-control" id="editorialCountry" name="editorialC" placeholder="Country" value="{{editorial.EditorialCountry}}" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Country.
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="id" value="{{editorial.id}}">
+                </div>
+
+                <div class="card-body p-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/admin/editorial" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </form>
+        {{/if}}
+    </div>
+</div>

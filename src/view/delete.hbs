@@ -1,0 +1,24 @@
+<div class="container">
+    <form action="/admin/delete/editorial" method="post">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1 class="card-title">Do you want to delete this editorial?</h1>
+            </div>
+            <div class="card-body row">
+                <div class="col-12 col-md-12">
+                    <ul>
+                        <li>{{editorial.id}}</li>
+                        <li>{{editorial.EditorialName}}</li>
+                        <li>{{editorial.EditorialPhone}}</li>
+                        <li>{{editorial.EditorialCountry}}</li>
+                    </ul>
+                    <input type="hidden" name="id" value="{{editorial.id}}">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Delete</button>
+                <a href="/admin/editorials" class="btn btn-warning">Cancel</a>
+            </div>
+        </div>
+    </form>    
+</div>

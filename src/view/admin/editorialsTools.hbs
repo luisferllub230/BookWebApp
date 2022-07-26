@@ -31,8 +31,8 @@
                         <td>{{e.EditorialCountry}}</td>
                         <td>{{e.booksCount}}</td>
                         <td>
-                            <a href="" class="btn btn-warning">Edit</a> | 
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="/admin/edit/editorial/{{e.id}}" class="btn btn-warning">Edit</a> | 
+                            <a href="/admin/delete/editorial/{{e.id}}" class="btn btn-danger">Delete</a>
                         </td>        
                     </tr>
                     {{/each}}
@@ -47,29 +47,25 @@
 
     <div class="modal-dialog modal-lg">
         <form action="/admin/editorials" method="post" class="needs-validation" novalidate>
-
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create a new editorial</h5>
                     <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body">
                     <div class="row">
-
-                        <div class="col-md-12">
-                            <div class="form-group fs-4 me-3 mt-2 mb-1">
-                                <label for="editorialName" class="form-label mb-0">Editorial name</label>
-                                <input type="text" class="form-control" id="editorialName" name="editorialN" placeholder="Name" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
+                            <div class="col-md-12">
+                                <div class="form-group fs-4 me-3 mt-2 mb-1">
+                                    <label for="editorialName" class="form-label mb-0">Editorial name</label>
+                                    <input type="text" class="form-control" id="editorialName" name="editorialN" placeholder="Name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
                         <div class="col-md-12">
                             <div class="form-group fs-4 me-3 mt-3 mb-1">
                                 <label for="editorialPhone" class="">Editorial phone</label>
@@ -82,7 +78,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-12">
                             <div class="form-group fs-4 me-3 mt-3 mb-1">
                                 <label for="editorialCountry" class="">Editorial country</label>
@@ -97,7 +92,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Create</button>
