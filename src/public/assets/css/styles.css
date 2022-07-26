@@ -6,3 +6,7 @@ body{
 footer{
     margin-top: auto;
 }
+
+.tableW{
+    width: 100%;
+}

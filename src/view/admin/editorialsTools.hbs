@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row m-2">
+        <div class="col-md-12 text-center"> 
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editorial">
+                create new editorial
+            </button>
+        </div>
+        <div class="card-body table-responsive">
+            <table id="tableTools" class="table table-dark table-striped tableW">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>number of books</th>
+                        <th>Edit / Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each editorials as |e key|}}
+                    <tr>
+                        <td>{{e.id}}</td>
+                        <td>{{e.EditorialName}}</td>
+                        <td>{{e.EditorialPhone}}</td>
+                        <td>{{e.EditorialCountry}}</td>
+                        <td>{{e.booksCount}}</td>
+                        <td>
+                            <a href="" class="btn btn-warning">Edit</a> | 
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>        
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editorial" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <form action="/admin/editorials" method="post" class="needs-validation" novalidate>
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a new editorial</h5>
+                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group fs-4 me-3 mt-2 mb-1">
+                                <label for="editorialName" class="form-label mb-0">Editorial name</label>
+                                <input type="text" class="form-control" id="editorialName" name="editorialN" placeholder="Name" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group fs-4 me-3 mt-3 mb-1">
+                                <label for="editorialPhone" class="">Editorial phone</label>
+                                <input type="text" class="form-control" id="editorialPhone" name="editorialP" placeholder="000-000-0000" maxlength="10" autocomplete="off" min="1" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please choose a Phone number.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group fs-4 me-3 mt-3 mb-1">
+                                <label for="editorialCountry" class="">Editorial country</label>
+                                <input type="text" class="form-control" id="editorialCountry" name="editorialC" placeholder="Country" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please choose a Country.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

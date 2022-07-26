@@ -42,4 +42,4 @@ app.use(ER);
 tr();
 
 //launch server and create or update database
-BookWebApp.sync({/*force:true*/}).then(()=>app.listen(5500)).catch(err =>console.log(err));
+BookWebApp.sync({}).then(()=>app.listen(5500)).catch(err =>console.log(err));

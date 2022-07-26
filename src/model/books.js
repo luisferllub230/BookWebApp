@@ -11,10 +11,6 @@ const books = bookWebApp.define('books', {
         type: sequelize.STRING,
         allowNull: false
     },
-    BookAuthor:{
-        type: sequelize.STRING,
-        allowNull: false
-    },
 });
 
 export default books;

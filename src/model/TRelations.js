@@ -8,32 +8,28 @@ import editorials from './editorials.js';
 const relations = () => {
 
     //editorials relations with author
-    editorials.hasOne(author);
-    author.belongsTo(editorials,{
-        name: 'editorialsID',
-        delete: 'CASCADE',
+    editorials.hasMany(author,{
+        onDelete: 'CASCADE',
     });
+    author.belongsTo(editorials);
 
     //editorials relations with books
-    editorials.hasOne(books);
-    books.belongsTo(editorials,{
-        name: 'editorialsID',
-        delete: 'CASCADE',
+    editorials.hasMany(books,{
+        onDelete: 'CASCADE',
     });
+    books.belongsTo(editorials);
 
     //author relations with books
-    author.hasOne(books);
-    books.belongsTo(author,{
-        name: 'authorID',
-        delete: 'CASCADE',
+    author.hasMany(books,{
+        onDelete: 'CASCADE',
     });
+    books.belongsTo(author);
 
     //categories relations with books
-    categories.hasOne(books);
-    books.belongsTo(categories,{
-        name: 'categoriesID',
-        delete: 'CASCADE',
+    categories.hasMany(books,{
+        onDelete: 'CASCADE',
     });
+    books.belongsTo(categories);
 }
 
 export default relations;
