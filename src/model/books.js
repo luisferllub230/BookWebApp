@@ -11,6 +11,14 @@ const books = bookWebApp.define('books', {
         type: sequelize.STRING,
         allowNull: false
     },
+    bookImagePath:{
+        type: sequelize.STRING,
+        allowNull: false
+    },
+    BookYear:{
+        type: sequelize.STRING,
+        allowNull: false
+    }
 });
 
 export default books;

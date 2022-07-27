@@ -1,0 +1,232 @@
+<div class="container">
+  <div class="row m-2">
+    <div class="col-md-12 text-center">
+      <h1>{{title}}</h1>
+    </div>
+  </div>
+  <div class="card mt-5 mb-5">
+    <div class="card-header">
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#book"
+      >
+        create new Book
+      </button>
+    </div>
+    <div class="card-body table-responsive">
+      <table id="tableTools" class="table table-dark table-striped tableW">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>img</th>
+            <th>Create Year</th>
+            <th>Category</th>
+            <th>Author</th>
+            <th>Editorial</th>
+            <th>Edit / Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each books as |b key|}}
+            <tr>
+              <td>{{b.id}}</td>
+              <td>{{b.BookName}}</td>
+              <td><img src="{{b.bookImagePath}}" alt="{{b.BookName}}" /></td>
+              <td>{{b.BookYear}}</td>
+              <td>{{b.category.dataValues.CategoryName}}</td>
+              <td>{{b.author.dataValues.AuthorName}}</td>
+              <td>{{b.editorial.dataValues.EditorialName}}</td>
+              <td>
+                <a
+                  href="/admin/edit/editorial/{{e.id}}"
+                  class="btn btn-warning"
+                >Edit</a>
+                |
+                <a
+                  href="/admin/delete/editorial/{{e.id}}"
+                  class="btn btn-danger"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="book"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+  role="dialog"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <form
+      {{!-- enctype="multipart/form-data" --}}
+      action="/admin/books"
+      method="post"
+      class="needs-validation"
+      novalidate
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create a new Book</h5>
+          <button
+            type="button"
+            class="btn-close btn-danger"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group fs-4 me-3 mt-2 mb-1">
+                <label for="bookN" class="form-label mb-0">Book name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bookN"
+                  name="bookN"
+                  placeholder="Name"
+                  required
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please choose a name.
+                </div>
+              </div>
+            </div>
+
+            {{!-- <div class="col-md-12">
+              <div class="form-group fs-4 me-3 mt-3 mb-1">
+                <label for="bookImgPath" class="form-label">Select a images</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  name="bookImgPath"
+                  id="bookImgPath"
+                  required
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please choose a images.
+                </div>
+              </div>
+            </div> --}}
+
+            <div class="col-md-12">
+              <div class="form-group fs-4 me-3 mt-3 mb-1">
+                <label for="editorialCountry" class="">Book Year</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="bookYear"
+                  name="bookYear"
+                  required
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please choose a Year.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+
+              <div class="form-group fs-4 me-3 mt-2 mb-1">
+                <label for="bookAuthor" class="form-label mb-0">Author Book</label>
+                <select
+                  class="form-select"
+                  id="bookAuthor"
+                  name="bookAuthor"
+                  required
+                >
+                  <option selected value="">Select an Author</option>
+                  {{#each authors as |a key|}}
+                    <option value="{{a.id}}">{{a.AuthorName}}</option>
+                  {{/each}}
+                </select>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please Select an author.
+                </div>
+              </div>
+
+              <div class="form-group fs-4 me-3 mt-2 mb-1">
+                <label for="bookCategory" class="form-label mb-0">Category Book</label>
+                <select
+                  class="form-select"
+                  id="bookCategory"
+                  name="bookCategory"
+                  required
+                >
+                  <option selected value="">Select a Category</option>
+                  {{#each categoric as |c key|}}
+                    <option value="{{c.id}}">{{c.CategoryName}}</option>
+                  {{/each}}
+                </select>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please Select a Category.
+                </div>
+              </div>
+
+              <div class="form-group fs-4 me-3 mt-2 mb-1">
+                <label for="bookEditorial" class="form-label mb-0">Editorial Book</label>
+                <select
+                  class="form-select"
+                  id="bookEditorial"
+                  name="bookEditorial"
+                  required
+                >
+                  <option selected value="">Select an Editorial</option>
+                  {{#each editorials as |e key|}}
+                    <option value="{{e.id}}">{{e.EditorialName}}</option>
+                  {{/each}}
+                </select>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please Select a Category.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >Close</button>
+          <button type="submit" class="btn btn-success">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

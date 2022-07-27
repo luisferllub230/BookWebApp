@@ -2,15 +2,65 @@ import em from '../model/editorials.js';
 import am from '../model/author.js';
 import bm from '../model/books.js';
 import cm from '../model/categories.js';
+import nodemailer from 'nodemailer';
 import sequelize from 'sequelize';
 import {sendTotal} from '../util/bookTotalLogical.js';
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    auth: {
+        user: 'aletesting3@gmail.com',
+        pass: 'xzvnopcxxygtfaym'
+    },
+    tls:{
+        rejectUnauthorized: false
+    }
+});
+
 //*********************books*****************/
 const getBooks = (req, res, next) => {
-    res.render('./admin/booksTools',{
-        title: 'Books',
-        activeBooks: true
-    });
+    bm.findAll({include: [{model: em}, {model: am}, {model: cm}]}).then(b=>{
+        em.findAll({}).then(e=>{
+            am.findAll({}).then(a=>{
+                cm.findAll({}).then(c=>{
+
+                    const editorials = e.map(e=>e.dataValues);
+                    const authors = a.map(a=>a.dataValues);
+                    const categoric = c.map(c=>c.dataValues);
+                    const books = b.map(b=>b.dataValues);
+                    res.render('./admin/booksTools',{
+                        title: 'Books',
+                        activeBooks: true,
+                        books,
+                        editorials,
+                        authors,
+                        categoric
+                    });
+
+                }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+}
+
+const posBooks = (req, res, next) => {
+    const BookName = req.body.bookN, bookYear = req.body.bookYear, bookImg = req.body.bookImagePath, bookA = req.body.bookAuthor, bookE = req.body.bookEditorial, bookC = req.body.bookCategory;
+
+    bm.create({BookName: BookName,BookYear: bookYear,bookImagePath: "req.body.bookImagePath",authorId: bookA,editorialId: bookE,categoryId: bookC,}).then(()=>{
+        am.findOne({where:{id: bookA}}).then(a=>{
+
+            const AuthorEmail = a.dataValues.AuthorGmail;
+            res.status(200).redirect('/admin/books')
+            transporter.sendMail({
+                from: 'Book web App notification',
+                to: `${AuthorEmail}`,
+                subject: 'New book published', 
+                html: `New book ${BookName} has been added to the database,<br><br>we have published a book of your authorship`
+            },(err)=>console.log(err));
+
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 }
 
 //**********************categories**************************/
@@ -207,4 +257,4 @@ const posDelete = (req, res, next) => {
     }
 }
 
-export {getBooks, getCategories, getAuthor, getEditorials, posEditorials, getEdit, posEdit, getDelete, posDelete, posAuthor, posCategory};
+export {getBooks, getCategories, getAuthor, getEditorials, posEditorials, getEdit, posEdit, getDelete, posDelete, posAuthor, posCategory, posBooks};
