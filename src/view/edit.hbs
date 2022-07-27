@@ -71,7 +71,7 @@
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Please choose a name.
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Please choose a Phone number.
+                            Please choose a Email.
                         </div>
                     </div>
                 </div>
@@ -96,8 +96,40 @@
         </form>
         {{/if}}
 
-
-
-
+        {{#if activeCategory}}
+            <form action="/admin/edit/categoric" method="post" class="needs-validation" novalidate>
+            <div class="card-body row">
+                <div class="col-md-12">
+                    <div class="form-group fs-4 me-3 mt-2 mb-1">
+                        <label for="categoryN" class="form-label mb-0">categoric name</label>
+                        <input type="text" class="form-control" id="categoryN" name="categoryN" placeholder="Name" value="{{category.CategoryName}}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group fs-4 me-3 mt-3 mb-1">
+                        <label for="categoryD" class="">Category Description</label>
+                        <input type="text" id="categoryD" class="form-control" value="{{category.CategoryDescription}}" name="categoryD" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a Description.
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{{category.id}}">
+                <div class="card-body p-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/admin/categoric" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </form>
+        {{/if}}
     </div>
 </div>
