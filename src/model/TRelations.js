@@ -7,12 +7,6 @@ import editorials from './editorials.js';
 
 const relations = () => {
 
-    //editorials relations with author
-    editorials.hasMany(author,{
-        onDelete: 'CASCADE',
-    });
-    author.belongsTo(editorials);
-
     //editorials relations with books
     editorials.hasMany(books,{
         onDelete: 'CASCADE',

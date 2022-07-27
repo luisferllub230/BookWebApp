@@ -25,7 +25,7 @@ const __dirname = dirname(__filename);
 app.engine('hbs', expressHbs.engine({
     layoutsDir: 'src/view/layout',
     defaultLayout: 'main-layout',
-    extname: 'hbs'
+    extname: 'hbs',
 }));
 app.set('view engine', 'hbs');
 app.set('views',path.join(__dirname,'view'));

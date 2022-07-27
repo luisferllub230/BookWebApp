@@ -54,10 +54,50 @@
 
                 <div class="card-body p-2">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="/admin/editorial" class="btn btn-warning">Cancel</a>
+                    <a href="/admin/editorials" class="btn btn-warning">Cancel</a>
                 </div>
             </div>
         </form>
         {{/if}}
+
+        {{#if activeAuthor}}
+        <form action="/admin/edit/author" method="post" class="needs-validation" novalidate>
+            <div class="card-body row">
+                <div class="col-md-12">
+                    <div class="form-group fs-4 me-3 mt-2 mb-1">
+                        <label for="authorName" class="form-label mb-0">Author name</label>
+                        <input type="text" class="form-control" id="authorName" name="authorN" placeholder="Name" value="{{author.AuthorName}}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group fs-4 me-3 mt-3 mb-1">
+                        <label for="authorPhone" class="">Author Email</label>
+                        <input type="email" class="form-control" value="{{author.AuthorGmail}}" name="authorG" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a Phone number.
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{{author.id}}">
+                <div class="card-body p-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/admin/author" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </form>
+        {{/if}}
+
+
+
+
     </div>
 </div>

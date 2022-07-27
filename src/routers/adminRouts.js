@@ -1,11 +1,13 @@
 import express from 'express';
-import {getBooks, getCategories, getAuthor, getEditorials, posEditorials, posEdit, getEdit, getDelete, posDelete} from '../controller/admin.js';
+import {getBooks, getCategories, getAuthor, getEditorials, posEditorials, posEdit, getEdit, getDelete, posDelete, posAuthor} from '../controller/admin.js';
 
 const adminRoutes = express.Router();
 
 adminRoutes.get('/books', getBooks);
 adminRoutes.get('/categoric', getCategories);
+
 adminRoutes.get('/author', getAuthor);
+adminRoutes.post('/author', posAuthor);
 
 adminRoutes.get('/editorials', getEditorials);
 adminRoutes.post('/editorials', posEditorials);
