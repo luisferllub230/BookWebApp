@@ -1,5 +1,7 @@
 import express from 'express';
-import {getBooks, getCategories, getAuthor, getEditorials, posEditorials, posEdit, getEdit, getDelete, posDelete, posAuthor,posCategory, posBooks} from '../controller/admin.js';
+import {getBooks, getCategories, getAuthor, getEditorials, posEditorials, posAuthor,posCategory, posBooks} from '../controller/admin.js';
+import { getEdit, posEdit } from '../controller/edit.js';
+import {getDelete, posDelete} from '../controller/delete.js';
 
 const adminRoutes = express.Router();
 

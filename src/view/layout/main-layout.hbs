@@ -33,6 +33,9 @@
               <li class="nav-item">
                 <a class="nav-link {{#if activeEditorials}} active {{/if}}" href="/admin/editorials">Editorials tools</a>
               </li>
+              {{#if activeHome}}
+              <button class="btn btn-success " type="button" data-bs-toggle="modal" data-bs-target="#modalSearch">search Books</button>
+            {{/if}}
             </ul>
           </div>
         </div>

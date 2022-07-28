@@ -34,19 +34,19 @@
             <tr>
               <td>{{b.id}}</td>
               <td>{{b.BookName}}</td>
-              <td><img src="{{b.bookImagePath}}" alt="{{b.BookName}}" /></td>
+              <td><img src="{{b.bookImagePath}}" alt="{{b.BookName}}" class="img-table" /></td>
               <td>{{b.BookYear}}</td>
               <td>{{b.category.dataValues.CategoryName}}</td>
               <td>{{b.author.dataValues.AuthorName}}</td>
               <td>{{b.editorial.dataValues.EditorialName}}</td>
               <td>
                 <a
-                  href="/admin/edit/editorial/{{e.id}}"
+                  href="/admin/edit/books/{{b.id}}"
                   class="btn btn-warning"
                 >Edit</a>
                 |
                 <a
-                  href="/admin/delete/editorial/{{e.id}}"
+                  href="/admin/delete/books/{{b.id}}"
                   class="btn btn-danger"
                 >Delete</a>
               </td>
@@ -74,7 +74,7 @@
     class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
   >
     <form
-      {{!-- enctype="multipart/form-data" --}}
+      enctype="multipart/form-data"
       action="/admin/books"
       method="post"
       class="needs-validation"
@@ -113,7 +113,7 @@
               </div>
             </div>
 
-            {{!-- <div class="col-md-12">
+            <div class="col-md-12">
               <div class="form-group fs-4 me-3 mt-3 mb-1">
                 <label for="bookImgPath" class="form-label">Select a images</label>
                 <input
@@ -121,6 +121,7 @@
                   type="file"
                   name="bookImgPath"
                   id="bookImgPath"
+                  accept="image/png, image/gif, image/jpeg"
                   required
                 />
                 <div class="valid-feedback">
@@ -130,7 +131,7 @@
                   Please choose a images.
                 </div>
               </div>
-            </div> --}}
+            </div>
 
             <div class="col-md-12">
               <div class="form-group fs-4 me-3 mt-3 mb-1">

@@ -1,0 +1,137 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <h1 class="text-center">
+                {{#if activeBook}}{{title}}{{else}}Sorry the aren't books{{/if}}
+            </h1>
+        </div>
+
+
+        {{#each books as |b key|}}
+        
+            <div class="col-12 col-md-3">
+                <a href="/home/book/{{b.id}}" class="btn text-start">
+                    <div class="card border-dark mb-3">
+                        <div class="card-header">
+                            <h1 class="fs-4">ID: {{b.id}}</h1>
+                            <h5 class="fs-5 card-title">{{b.BookName}}</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <img
+                                src="{{b.bookImagePath}}"
+                                alt="{{pk.BookName}}"
+                                class=""
+                            />
+                        </div>
+                        <div class="card-footer">
+                        <ul>
+                            <li><samp class="fw-bold fs-6">Year: </samp> {{b.BookYear}}</li>
+                            <li><samp class="fw-bold fs-6">Author: </samp> {{b.author.dataValues.AuthorName}}</li>
+                            <li><samp class="fw-bold fs-6">Category: </samp> {{b.category.dataValues.CategoryName}}</li>
+                            <li><spam class="fw-bold fs-6">Editorial: </spam> {{b.editorial.dataValues.EditorialName}}</li>
+                        </ul>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+
+{{! modal }}
+<div
+  class="modal fade"
+  id="modalSearch"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="offcanvasWithBackdropLabel">Search by
+          parameters</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <form action="/" method="post">
+        <div class="modal-body">
+
+          <div class="row">
+
+            {{! search by name }}
+            <div class="col-12">
+              <div class="card border border-success">
+                <div class="card-header">
+                  <div class="card-title">
+                    <h5 class="text-center">Search by name</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      name="name"
+                      placeholder="Enter the book title"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{! search by categoria }}
+            <div class="col-12 pt-3">
+              <div class="card p-3 pt-3 border border-success">
+                <div class="card-header">
+                  <div class="card-title">
+                    <h5 class="text-center">Search by Category</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  {{#each categories as |rg key|}}
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="{{rg.id}}"
+                        id="{{rg.CategoryName}}"
+                        name="inputID"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="{{rg.CategoryName}}"
+                      >
+                        {{rg.CategoryName}}
+                      </label>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <div class="pt-3 d-grid gap-2 col-12 mx-auto">
+            <button class="btn-primary" type="submit">Search</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

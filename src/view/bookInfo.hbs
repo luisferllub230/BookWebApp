@@ -1,0 +1,33 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">
+                    {{#if activeBook}}{{title}}{{else}}Sorry the aren't books{{/if}}
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6 m-0 mb-md3">
+                        <img src="{{book.bookImagePath}}" alt="{{book.BookName}}" class="img-delete">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <li><samp class="fw-bold fs-6">Name: </samp> {{book.BookName}}</li>
+                        <li><samp class="fw-bold fs-6">Year: </samp> {{book.BookYear}}</li>
+                        <li><samp class="fw-bold fs-6">Author: </samp> {{book.author.dataValues.AuthorName}}</li>
+                        <li><samp class="fw-bold fs-6">Category: </samp> {{book.category.dataValues.CategoryName}}</li>
+                        <li><spam class="fw-bold fs-6">Editorial: </spam> {{book.editorial.dataValues.EditorialName}}</li>
+                        
+                        <li><samp class="fw-bold fs-6">Editorial Country: </samp> {{edi.EditorialCountry}}</li>
+                        <li><samp class="fw-bold fs-6">Editorial Phone: </samp> {{edi.EditorialPhone}}</li>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

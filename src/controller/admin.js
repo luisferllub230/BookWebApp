@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import sequelize from 'sequelize';
 import {sendTotal} from '../util/bookTotalLogical.js';
 
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     secure: false,
@@ -21,14 +22,14 @@ const transporter = nodemailer.createTransport({
 //*********************books*****************/
 const getBooks = (req, res, next) => {
     bm.findAll({include: [{model: em}, {model: am}, {model: cm}]}).then(b=>{
+        const books = b.map(b=>b.dataValues);
         em.findAll({}).then(e=>{
+            const editorials = e.map(e=>e.dataValues);
             am.findAll({}).then(a=>{
+                const authors = a.map(a=>a.dataValues);
                 cm.findAll({}).then(c=>{
-
-                    const editorials = e.map(e=>e.dataValues);
-                    const authors = a.map(a=>a.dataValues);
                     const categoric = c.map(c=>c.dataValues);
-                    const books = b.map(b=>b.dataValues);
+
                     res.render('./admin/booksTools',{
                         title: 'Books',
                         activeBooks: true,
@@ -45,9 +46,10 @@ const getBooks = (req, res, next) => {
 }
 
 const posBooks = (req, res, next) => {
-    const BookName = req.body.bookN, bookYear = req.body.bookYear, bookImg = req.body.bookImagePath, bookA = req.body.bookAuthor, bookE = req.body.bookEditorial, bookC = req.body.bookCategory;
+    const BookName = req.body.bookN, bookYear = req.body.bookYear, bookImg = req.file, bookA = req.body.bookAuthor, bookE = req.body.bookEditorial, bookC = req.body.bookCategory;
 
-    bm.create({BookName: BookName,BookYear: bookYear,bookImagePath: "req.body.bookImagePath",authorId: bookA,editorialId: bookE,categoryId: bookC,}).then(()=>{
+    bm.create({BookName: BookName,BookYear: bookYear,bookImagePath: "/"+bookImg.path ,authorId: bookA,editorialId: bookE,categoryId: bookC,})
+    .then(()=>{
         am.findOne({where:{id: bookA}}).then(a=>{
 
             const AuthorEmail = a.dataValues.AuthorGmail;
@@ -134,127 +136,4 @@ const posEditorials = (req, res, next) => {
     }).catch(err => console.log(err));
 }
 
-//*********************edit*****************/
-const getEdit = (req, res, next) => {
-    const type = req.params.type;
-    const id = req.params.id;
-
-    if(type === 'editorial'){
-        em.findOne({ where: {id: id}}).then(e=>{
-            const editorial = e.dataValues;
-            res.render('edit',{
-                title: 'Edit Editorial',
-                activeEditorial: true,
-                editorial
-            })
-        }).catch(err => console.log(err));
-    }
-
-    if(type === 'author'){
-        am.findOne({ where: {id: id}}).then(a=>{
-            const author = a.dataValues;
-            res.render('edit',{
-                title: 'Edit Author',
-                activeAuthor: true,
-                author
-            })
-        }).catch(err => console.log(err));
-    }
-
-    if(type === 'categoric'){
-        cm.findOne({ where: {id: id}}).then(c=>{
-            const category = c.dataValues;
-            res.render('edit',{
-                title: 'Edit Category',
-                activeCategory: true,
-                category
-            })
-        }).catch(err => console.log(err));
-    }
-}
-const posEdit = (req, res, next) => {
-    const type = req.params.type;
-
-    if(type === 'editorial'){
-        em.update({
-            EditorialName: req.body.editorialN,
-            EditorialPhone: req.body.editorialP,
-            EditorialCountry: req.body.editorialC,
-        },
-        {where: {id: req.body.id}
-        }).then(()=>res.status(200).redirect('/admin/editorials')).catch(err => console.log(err));
-    }
-
-    if(type === 'author'){
-        am.update({
-            AuthorName: req.body.authorN,
-            AuthorGmail: req.body.authorG,
-        },
-        {where: {id: req.body.id}
-        }).then(()=>res.status(200).redirect('/admin/author')).catch(err => console.log(err));
-    }
-
-    if(type === 'categoric'){
-        cm.update({
-            CategoryName: req.body.categoryN,
-            CategoryDescription: req.body.categoryD,
-        },
-        {where: {id: req.body.id}
-        }).then(()=>res.status(200).redirect('/admin/categoric')).catch(err => console.log(err));
-    }
-}
-
-/**********************delete**************************/
-const getDelete = (req, res, next) => {
-    const type = req.params.type;
-    const id = req.params.id;
-
-    if(type === 'editorial'){
-        em.findOne({ where: {id: id}}).then(e=>{
-            const editorial = e.dataValues;
-            res.render('delete',{
-                title: 'Delete Editorial',
-                activeEditorial: true,
-                editorial
-            })
-        }).catch(err => console.log(err));
-    }
-
-    if(type === 'author'){
-        am.findOne({ where: {id: id}}).then(a=>{
-            const author = a.dataValues;
-            res.render('delete',{
-                title: 'Delete Author',
-                activeAuthor: true,
-                author
-            })
-        }).catch(err => console.log(err));
-    }
-
-    if(type === 'categoric'){
-        cm.findOne({ where: {id: id}}).then(c=>{
-            const category = c.dataValues;
-            res.render('delete',{
-                title: 'Delete Category',
-                activeCategory: true,
-                category
-            })
-        }).catch(err => console.log(err));
-    }
-}
-const posDelete = (req, res, next) => {
-    const type = req.params.type;
-    if(type === 'editorial'){
-        em.destroy({where: {id: req.body.id}}).then(()=>res.status(200).redirect('/admin/editorials')).catch(err => console.log(err));
-    }
-
-    if(type === 'author'){
-        am.destroy({where: {id: req.body.id}}).then(()=>res.status(200).redirect('/admin/author')).catch(err => console.log(err));
-    }
-
-    if(type === 'categoric'){
-        cm.destroy({where: {id: req.body.id}}).then(()=>res.status(200).redirect('/admin/categoric')).catch(err => console.log(err));
-    }
-}
-
-export {getBooks, getCategories, getAuthor, getEditorials, posEditorials, getEdit, posEdit, getDelete, posDelete, posAuthor, posCategory, posBooks};
+export {getBooks, getCategories, getAuthor, getEditorials, posEditorials, posAuthor, posCategory, posBooks};
