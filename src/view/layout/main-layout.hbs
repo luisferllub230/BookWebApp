@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../../assets/css/lib/bootstrap.min.css">
+</head>
+<body>
+        <header class="">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand {{#if activeHome}} active {{else}} text-secondary{{/if}}" href="/">Books</a>
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbarColor01" style="">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link {{#if activeHome}} active {{/if}}" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{#if activeBooks}} active {{/if}}" href="/admin/books">Book tools</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{#if activeCategories}} active {{/if}}" href="/admin/categoric">Categoric tools</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{#if activeAuthor}} active {{/if}}" href="/admin/author">Author tools</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{#if activeEditorials}} active {{/if}}" href="/admin/editorials">Editorials tools</a>
+              </li>
+              {{#if activeHome}}
+              <button class="btn btn-success " type="button" data-bs-toggle="modal" data-bs-target="#modalSearch">search Books</button>
+            {{/if}}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mt-5"> 
+      {{{body}}}
+    </main>
+
+    <footer class=" bg-dark text-white">
+      <div class="container bg-dark text-white">
+        <div class="text-center text-capitalize">
+          <p class="mb-0 pt-2">
+            No &copyrights | code free to use | you can see the all code here:
+            <a href="https://github.com/luisferllub230/BookWebApp" target="_blank">click here</a><br
+            />
+            😁luisferllub230
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../../../assets/js/index.js"></script>
+    <script src="../../../assets/js/lib/bootstrap.min.js"></script>
+</body>
+</html>

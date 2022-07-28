@@ -1,24 +1,20 @@
 import sequelize from "sequelize";
 import bookWebApp  from "../dataBase/BookWebApp.js";
 
-const books = bookWebApp.define('books', {
+const author = bookWebApp.define('author', {
     id: {
         type: sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    BookName:{
+    AuthorName:{
         type: sequelize.STRING,
         allowNull: false
     },
-    bookImagePath:{
-        type: sequelize.STRING,
-        allowNull: false
-    },
-    BookYear:{
+    AuthorGmail:{
         type: sequelize.STRING,
         allowNull: false
     }
 });
 
-export default books;
+export default author;

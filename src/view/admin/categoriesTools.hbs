@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row m-2">
+        <div class="col-md-12 text-center"> 
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#category">
+                create new Category
+            </button>
+        </div>
+        <div class="card-body table-responsive">
+            <table id="tableTools" class="table table-dark table-striped tableW">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>number of books</th>
+                        <th>Edit / Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each categories as |c key|}}
+                    <tr>
+                        <td>{{c.id}}</td>
+                        <td>{{c.CategoryName}}</td>
+                        <td>{{c.CategoryDescription}}</td>
+                        <td>{{c.booksCount}}</td>
+                        <td>
+                            <a href="/admin/edit/categoric/{{c.id}}" class="btn btn-warning">Edit</a> | 
+                            <a href="/admin/delete/categoric/{{c.id}}" class="btn btn-danger">Delete</a>
+                        </td>        
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <form action="/admin/categoric" method="post" class="needs-validation" novalidate>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a new category</h5>
+                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group fs-4 me-3 mt-2 mb-1">
+                                    <label for="category" class="form-label mb-0">category name</label>
+                                    <input type="text" class="form-control" id="category" name="categoryN" placeholder="Name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group fs-4 me-3 mt-2 mb-1">
+                                    <label for="categoryD" class="form-label mb-0">Description</label>
+                                    <input type="text" class="form-control" id="categoryD" name="categoryD" placeholder="Name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Description.
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

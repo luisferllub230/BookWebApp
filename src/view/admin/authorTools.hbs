@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row m-2">
+        <div class="col-md-12 text-center"> 
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#author">
+                create new author
+            </button>
+        </div>
+        <div class="card-body table-responsive">
+            <table id="tableTools" class="table table-dark table-striped tableW">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>number of books</th>
+                        <th>Edit / Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each authors as |a key|}}
+                    <tr>
+                        <td>{{a.id}}</td>
+                        <td>{{a.AuthorName}}</td>
+                        <td>{{a.AuthorGmail}}</td>
+                        <td>{{a.booksCount}}</td>
+                        <td>
+                            <a href="/admin/edit/author/{{a.id}}" class="btn btn-warning">Edit</a> |    
+                            <a href="/admin/delete/author/{{a.id}}" class="btn btn-danger">Delete</a>
+                        </td>        
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="author" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <form action="/admin/author" method="post" class="needs-validation" novalidate>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a new author</h5>
+                    <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group fs-4 me-3 mt-2 mb-1">
+                                    <label for="author" class="form-label mb-0">Editorial name</label>
+                                    <input type="text" class="form-control" id="author" name="authorN" placeholder="Name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-md-12">
+                            <div class="form-group fs-4 me-3 mt-3 mb-1">
+                                <label for="authorG" class="">Author Gmail</label>
+                                <input type="email" class="form-control" id="authorG" name="authorG" placeholder="Country" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please choose a Email.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
