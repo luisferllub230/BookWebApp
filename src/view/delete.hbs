@@ -1,6 +1,6 @@
 <div class="container">
     {{#if activeEditorial}}
-    <form action="/admin/delete/editorial" method="post">
+    <form action="/delete/editorials" method="post">
         <div class="card">
             <div class="card-header text-center">
                 <h1 class="card-title">Do you want to delete this editorial?</h1>
@@ -18,14 +18,14 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Delete</button>
-                <a href="/admin/editorials" class="btn btn-warning">Cancel</a>
+                <a href="/editorials" class="btn btn-warning">Cancel</a>
             </div>
         </div>
     </form>
     {{/if}}
 
     {{#if activeAuthor}}
-    <form action="/admin/delete/author" method="post">
+    <form action="/delete/author" method="post">
         <div class="card">
             <div class="card-header text-center">
                 <h1 class="card-title">Do you want to delete this author?</h1>
@@ -42,14 +42,14 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Delete</button>
-                <a href="/admin/author" class="btn btn-warning">Cancel</a>
+                <a href="/author" class="btn btn-warning">Cancel</a>
             </div>
         </div>
     </form>
     {{/if}}
 
     {{#if category}}
-    <form action="/admin/delete/categoric" method="post">
+    <form action="/delete/categoric" method="post">
         <div class="card">
             <div class="card-header text-center">
                 <h1 class="card-title">Do you want to delete this Category?</h1>
@@ -66,13 +66,13 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Delete</button>
-                <a href="/admin/categoric" class="btn btn-warning">Cancel</a>
+                <a href="/categoric" class="btn btn-warning">Cancel</a>
             </div>
         </div>
     </form>
     {{/if}}
     {{#if book}}
-    <form action="/admin/delete/book" method="post">
+    <form action="/delete/books" method="post">
         <div class="card">
             <div class="card-header text-center">
                 <h1 class="card-title">Do you want to delete this book?</h1>
@@ -95,7 +95,7 @@
             </div>          
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Delete</button>
-                <a href="/admin/books" class="btn btn-warning">Cancel</a>
+                <a href="/books" class="btn btn-warning">Cancel</a>
             </div>
         </div>
     </form>

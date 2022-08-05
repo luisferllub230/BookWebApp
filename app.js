@@ -7,9 +7,7 @@ import tr from './src/model/TRelations.js';
 import BookWebApp from "./src/dataBase/BookWebApp.js";
 import {dirname} from 'path';
 import {fileURLToPath} from 'url';
-import UR from './src/routers/userRouts.js';
-import AR from './src/routers/adminRouts.js';
-import ER from './src/routers/errorRouts.js';
+import RT from './src/routers/router.js';
 import multer from 'multer';
 import {v4}  from 'uuid';
 
@@ -52,9 +50,7 @@ app.set('view engine', 'hbs');
 app.set('views',path.join(__dirname,'/src/view'));
 
 //routes
-app.use(UR);
-app.use('/admin/',AR);
-app.use(ER);
+app.use(RT);
 
 //tables relations
 tr();
