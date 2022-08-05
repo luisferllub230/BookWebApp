@@ -29,8 +29,8 @@
                         <td>{{c.CategoryDescription}}</td>
                         <td>{{c.booksCount}}</td>
                         <td>
-                            <a href="/admin/edit/categoric/{{c.id}}" class="btn btn-warning">Edit</a> | 
-                            <a href="/admin/delete/categoric/{{c.id}}" class="btn btn-danger">Delete</a>
+                            <a href="/edit/categoric/{{c.id}}" class="btn btn-warning">Edit</a> | 
+                            <a href="/delete/categoric/{{c.id}}" class="btn btn-danger">Delete</a>
                         </td>        
                     </tr>
                     {{/each}}
@@ -44,7 +44,7 @@
 <div class="modal fade" id="category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-lg">
-        <form action="/admin/categoric" method="post" class="needs-validation" novalidate>
+        <form action="/categoric" method="post" class="needs-validation" novalidate>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create a new category</h5>
